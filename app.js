@@ -5,9 +5,13 @@ let resetBtn = document.getElementById('btnn');
 const footer = document.getElementById('footer');
 console.log(resetBtn);
 
-const randomGenerator = () => {
- return Math.floor(Math.random() * 100 + 1);
-}
+// const randomGenerator = () => {
+//  return Math.floor(Math.random() * 100 + 1);
+// }
+
+randomGenerator = Math.floor(Math.random() * 100 + 1);
+
+console.log(randomGenerator)
 
 let live = 5;
 
@@ -15,10 +19,22 @@ button.addEventListener('click', btnFunc)
 
 function btnFunc() {
     if (!inputText.value) {
-        return alert('Please enter your guess')
-    }else {
+         alert('Please enter your guess')
+    }else if (inputText.value < 0 || inputText.value > 100){
+        alert('Please enter a number between 1 and 100')
+        inputText.value = ''
+    }
+    // else if (typeof inputText.value !== Number){
+    //     alert('Please enter a number')
+    //     inputText.value = ''
+    // }
+    else {
         if (inputText.value == randomGenerator){
             alert(`congrats, you're guess is right`);
+            resetBtn.style.display = 'inline';
+            inputText.style.display = 'none';
+            button.style.display = 'none';
+            resetBtn.addEventListener('click', () => window.location.reload(false));
             inputText.value = ''
         }else {
             if (live >= 1){
